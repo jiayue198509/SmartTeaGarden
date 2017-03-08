@@ -3,6 +3,7 @@ package com.tianciqinyun.smartteagarden.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.tianciqinyun.smartteagarden.R;
+import com.tianciqinyun.smartteagarden.tools.BitmapUtil;
 import com.tianciqinyun.smartteagarden.tools.DensityUtil;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class WelcomeGuideActivity extends Activity implements View.OnClickListen
     private int mPointWidth;// 圆点间的距离
     private View viewBluePoint;// 蓝点
     private int tenDPtoPx;
+    public static Bitmap btp;
 
     private SharedPreferences shared;
     private SharedPreferences.Editor editor;
@@ -55,14 +58,25 @@ public class WelcomeGuideActivity extends Activity implements View.OnClickListen
     private void initViewPager() {
         list = new ArrayList<View>();
         ImageView iv = new ImageView(this);
-        iv.setImageResource(R.drawable.guide_01);
+        iv.setImageBitmap(BitmapUtil.readBitMap(this,R.drawable.guide_01));
         list.add(iv);
+
+
         ImageView iv1 = new ImageView(this);
-        iv1.setImageResource(R.drawable.guide_02);
+        iv1.setImageBitmap(BitmapUtil.readBitMap(this,R.drawable.guide_02));
         list.add(iv1);
+
         ImageView iv2 = new ImageView(this);
-        iv2.setImageResource(R.drawable.guide_03);
+        iv2.setImageBitmap(BitmapUtil.readBitMap(this,R.drawable.guide_03));
         list.add(iv2);
+
+        ImageView iv3 = new ImageView(this);
+        iv3.setImageBitmap(BitmapUtil.readBitMap(this,R.drawable.guide_04));
+        list.add(iv3);
+
+        ImageView iv4 = new ImageView(this);
+        iv4.setImageBitmap(BitmapUtil.readBitMap(this,R.drawable.guide_05));
+        list.add(iv4);
 
         // 初始化引导页的灰色圆点
         for (int i = 0; i < list.size(); i++) {
@@ -92,7 +106,7 @@ public class WelcomeGuideActivity extends Activity implements View.OnClickListen
             //页卡被选中的效果
             @Override
             public void onPageSelected(int arg0) {
-                if (arg0 == 2) {
+                if (arg0 == 4) {
                     findViewById(R.id.btn_welcome_guide).setVisibility(View.VISIBLE);
                 } else {
                     findViewById(R.id.btn_welcome_guide).setVisibility(View.GONE);

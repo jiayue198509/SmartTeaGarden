@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#02a651</color>
     <color name="colorAccent">#039942</color>
     <color name="Gray">#808080</color>
+    <color name="guide_button_color">#029466</color>
 </resources>
