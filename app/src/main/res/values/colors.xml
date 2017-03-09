@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03d975</color>
-    <color name="colorPrimaryDark">#02a651</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#cecfce</color>
     <color name="colorAccent">#039942</color>
     <color name="Gray">#808080</color>
     <color name="guide_button_color">#029466</color>
+    <color name="welcome_activity_color">#cef7e9</color>
+    <color name="menuTextColor">#4e4d4d</color>
+    <color name="appBartitleColor">#656565</color>
+    <color name="activity_background_color">#e8eaea</color>
 </resources>

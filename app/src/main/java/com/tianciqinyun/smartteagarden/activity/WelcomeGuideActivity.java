@@ -1,5 +1,6 @@
 package com.tianciqinyun.smartteagarden.activity;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.tianciqinyun.smartteagarden.R;
+import com.tianciqinyun.smartteagarden.animators.BaseAnimation;
 import com.tianciqinyun.smartteagarden.tools.BitmapUtil;
 import com.tianciqinyun.smartteagarden.tools.DensityUtil;
 
@@ -33,16 +35,55 @@ public class WelcomeGuideActivity extends Activity implements View.OnClickListen
 
     private SharedPreferences shared;
     private SharedPreferences.Editor editor;
-    private boolean isFirstLaunch = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        shared = getSharedPreferences("userInfo", 0);
+        editor = shared.edit();
+        final boolean isFirstLaunch = shared.getBoolean("first-time-use", true);
+
         if (isFirstLaunch) {
             setContentView(R.layout.activity_welcome_guide);
         } else {
-            setContentView(R.layout.activity_welcome_guide);
+            setContentView(R.layout.activity_welcome_second);
+            ImageView img = (ImageView) findViewById(R.id.welcome_img);
+
+            BaseAnimation animator = new BaseAnimation(img);
+            animator.play();
+            animator.animator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    startActivity(new Intent(WelcomeGuideActivity.this, MainActivity.class));
+                    finish();
+                }
+                @Override
+                public void onAnimationCancel(Animator animator) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+                }
+            });
+            //加载动画
+
+//            animator.setAnimationListener(new Animation.AnimationListener(){
+//                @Override
+//                public void onAnimationStart(Animation animation) {}
+//                @Override
+//                public void onAnimationRepeat(Animation animation) {}
+//                @Override
+//                public void onAnimationEnd(Animation animation) {//动画结束
+//                    startActivity(new Intent(WelcomeGuideActivity.this, MainActivity.class));
+//                    finish();
+//                }
+//            });
+            return;
         }
 
 
@@ -131,6 +172,8 @@ public class WelcomeGuideActivity extends Activity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_welcome_guide:
+                editor.putBoolean("first-time-use", false);
+                editor.commit();
                 startActivity(new Intent(this, MainActivity.class));
                 this.finish();
                 break;
